@@ -1,6 +1,5 @@
-# fmRouter 0.1
-<img width="810" height="340" alt="000280 CleanShot 2025-10-07 at 15 02 00" src="https://github.com/user-attachments/assets/090f7480-6a39-4460-829c-c583d17fae7b" />
-© 2025 B. Alexander — [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# fmRouter 0.1 by B. Alexander 2025  - MIT license
+<img width="810" height="440" alt="image" src="https://github.com/user-attachments/assets/10ea67e1-faf7-4551-a981-2e7eeded1f5d" />
 
 
 ## Prompt Library and Multi-Model  AI Playground  for Claris FileMaker Pro
