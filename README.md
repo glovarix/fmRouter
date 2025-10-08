@@ -2,7 +2,6 @@
 ### by B. Alexander 2025  - MIT license
 <img width="810" height="440" alt="image" src="https://github.com/user-attachments/assets/10ea67e1-faf7-4551-a981-2e7eeded1f5d" />
 
-
 ## Prompt Library and Multi-Model  AI Playground  for Claris FileMaker Pro
 Lightweight, yet comprehensive prompt playground architecture that lets FileMaker developers create, version, and compare prompts and their outputs across multiple LLMs through free or paid models via  any provider e.g.  [OpenRouter](https://openrouter.ai)  or locally via [LM Studio](https://lmstudio.ai) . Endpoints, Models, Sources can all be dynamic making it a trully exciting way to track your prompt libaries and see them in action and compare results over time with a prompting and execution log.
 
@@ -58,14 +57,11 @@ https://chatgpt.com/g/g-68aea2a957a8819186af31f366b178df-baxter-prompt-butler-js
 
 **Execution tracking across models, temperature and Prompt versions**
 
-<img width="2784" height="568" alt="000273 CleanShot 2025-10-07 at 00 00 24" src="https://github.com/user-attachments/assets/17f93c6e-cde8-4aae-8e3f-fea0f3d98590" />
-
 
 ## 📄 Licensing 
 
-Released under the **MIT License** — free to use, modify, and extend.
+Released under the **MIT License** — free to use, modify, and extend as you like. 
 
-Please reach out for feedback or access to the demo file
 
 ### Request demo file 
 
