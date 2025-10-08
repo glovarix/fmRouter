@@ -1,5 +1,5 @@
 # fmRouter 0.1 
-by B. Alexander 2025  - MIT license
+### by B. Alexander 2025  - MIT license
 <img width="810" height="440" alt="image" src="https://github.com/user-attachments/assets/10ea67e1-faf7-4551-a981-2e7eeded1f5d" />
 
 
@@ -50,16 +50,11 @@ https://chatgpt.com/g/g-68aea2a957a8819186af31f366b178df-baxter-prompt-butler-js
 
 **Playground Screen**
 
-<img width="2880" height="1582" alt="000282 CleanShot 2025-10-07 at 16 37 31" src="https://github.com/user-attachments/assets/a1f4db3e-e942-489a-b57a-9a06ca8ee9fc" />
 
 
 **Select Models**
 
-<img width="514" height="662" alt="000256 CleanShot 2025-10-06 at 10 11 40" src="https://github.com/user-attachments/assets/0e1b3d60-4889-47b4-ac6f-03335f46a9a8" />
-
 **Prompt Management**
-
-<img width="2852" height="1568" alt="000254 CleanShot 2025-10-06 at 09 53 52" src="https://github.com/user-attachments/assets/28ef3276-6965-4f19-9081-9b26a07875f9" />
 
 **Execution tracking across models, temperature and Prompt versions**
 
