@@ -51,8 +51,6 @@ https://chatgpt.com/g/g-68aea2a957a8819186af31f366b178df-baxter-prompt-butler-js
 <img width="1672" height="917" alt="000286 CleanShot 2025-10-08 at 10 00 29" src="https://github.com/user-attachments/assets/21943edc-f29d-4a3f-aac3-27d47849ca8f" />
 
 **Prompt Management and Execution History**
-![Uploading 000287 CleanShot 2025-10-08 at 10.01.00.png…]()
-
 
 <img width="1506" height="960" alt="000285 CleanShot 2025-10-08 at 09 59 10" src="https://github.com/user-attachments/assets/7bb51bb9-b862-4a7a-a877-81c4832c74b7" />
 
