@@ -1,6 +1,6 @@
 # fmRouter 0.1 
 ### by B. Alexander 2025  - MIT license
-<img width="810" height="440" alt="image" src="https://github.com/user-attachments/assets/10ea67e1-faf7-4551-a981-2e7eeded1f5d" />
+<img width="610" height="260" alt="image" src="https://github.com/user-attachments/assets/10ea67e1-faf7-4551-a981-2e7eeded1f5d" />
 
 ## Prompt Library and Multi-Model  AI Playground  for Claris FileMaker Pro
 Lightweight, yet comprehensive prompt playground architecture that lets FileMaker developers create, version, and compare prompts and their outputs across multiple LLMs through free or paid models via  any provider e.g.  [OpenRouter](https://openrouter.ai)  or locally via [LM Studio](https://lmstudio.ai) . Endpoints, Models, Sources can all be dynamic making it a trully exciting way to track your prompt libaries and see them in action and compare results over time with a prompting and execution log.
@@ -48,14 +48,13 @@ https://chatgpt.com/g/g-68aea2a957a8819186af31f366b178df-baxter-prompt-butler-js
 ## Screenshots
 
 **Playground Screen**
+<img width="1672" height="917" alt="000286 CleanShot 2025-10-08 at 10 00 29" src="https://github.com/user-attachments/assets/21943edc-f29d-4a3f-aac3-27d47849ca8f" />
+
+**Prompt Management and Execution History**
+![Uploading 000287 CleanShot 2025-10-08 at 10.01.00.png…]()
 
 
-
-**Select Models**
-
-**Prompt Management**
-
-**Execution tracking across models, temperature and Prompt versions**
+<img width="1506" height="960" alt="000285 CleanShot 2025-10-08 at 09 59 10" src="https://github.com/user-attachments/assets/7bb51bb9-b862-4a7a-a877-81c4832c74b7" />
 
 
 ## 📄 Licensing 
