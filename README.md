@@ -1,6 +1,6 @@
 # fmRouter 0.1 
 ### by B. Alexander 2025  - MIT license
-
+https://sdmntprwestus.oaiusercontent.com/files/00000000-793c-6230-ad20-48beb454dab6/raw?se=2025-10-08T14%3A49%3A12Z&sp=r&sv=2024-08-04&sr=b&scid=ee13fb7c-9eed-5087-9240-4d935b832b3c&skoid=1e4bb9ed-6bb5-424a-a3aa-79f21566e722&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-10-07T22%3A22%3A15Z&ske=2025-10-08T22%3A22%3A15Z&sks=b&skv=2024-08-04&sig=0XQU3b1ielLBOVGmBspuluYJtocZSDFKd7hOgU5cy%2Bk%3D
 
 ## Prompt Library and Multi-Model  AI Playground  for Claris FileMaker Pro
 Lightweight, yet comprehensive prompt playground architecture that lets FileMaker developers create, version, and compare prompts and their outputs across multiple LLMs through free or paid models via  any provider e.g.  [OpenRouter](https://openrouter.ai)  or locally via [LM Studio](https://lmstudio.ai) . Endpoints, Models, Sources can all be dynamic making it a trully exciting way to track your prompt libaries and see them in action and compare results over time with a prompting and execution log.
