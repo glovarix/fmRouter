@@ -10,27 +10,18 @@ FileMaker 2025 makes all of this possible without the Insert From URL step too.
 
 ---
 
-## Use Cases
+This repository includes the **full XML copy and DDR**, so you can explore the schema in detail using DDR tools like [**FM Perception**](https://www.geistinteractive.com/products/fm-perception/) or [**InspectorPro**](https://www.productivecomputing.com/inspectorpro).
+
+
+
+## Core Use Cases
 
 - Create a New Prompt / Edit Existing Prompts.
 - Edit and  Automatically save Version History.
 - Run a Prompt from Playground with dynamic variables for models, endpoint, temperature settings etc.
 - Keep track of executions, models, prompts and version.
 ---
-## 🧭 Data Model Overview
 
-This repository includes the **full XML copy and DDR**, so you can explore the schema in detail using DDR tools like [**FM Perception**](https://www.geistinteractive.com/products/fm-perception/) or [**InspectorPro**](https://www.productivecomputing.com/inspectorpro).
-
-| Table | What It Does |
-|-------|--------------|
-| Playgrounds | Define endpoints (OpenRouter, LM Studio, custom APIs) |
-| Prompts | Your prompt library with metadata and tags |
-| Versions | Auto-saved history—rollback to any previous version |
-| Executions | Complete audit trail: model, temperature, tokens, cost, response |
-| Models | Pre-configured model list (easily add custom models) |
-| Datasets | Inject FileMaker data into prompts for context-aware AI |
-| Entries (External)*| Secure credential storage in separate filemaker file |
----
 ### 🚀 Summary
 
 * 🔀 **Route prompts to multiple models** and compare outputs side by side
