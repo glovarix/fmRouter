@@ -40,7 +40,9 @@ https://chatgpt.com/g/g-68aea2a957a8819186af31f366b178df-baxter-prompt-butler-js
 ## Screenshots
 
 **Playground Screen**
-<img width="1672" height="917" alt="000286 CleanShot 2025-10-08 at 10 00 29" src="https://github.com/user-attachments/assets/21943edc-f29d-4a3f-aac3-27d47849ca8f" />
+
+<img width="3360" height="1828" alt="000296 CleanShot 2025-10-08 at 23 42 03" src="https://github.com/user-attachments/assets/55f75988-92dd-44c8-b991-14158ef8e8e5" />
+
 
 **Prompt Management and Execution History**
 
