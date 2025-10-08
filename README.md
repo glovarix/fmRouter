@@ -55,11 +55,8 @@ https://chatgpt.com/g/g-68aea2a957a8819186af31f366b178df-baxter-prompt-butler-js
 <img width="1506" height="960" alt="000285 CleanShot 2025-10-08 at 09 59 10" src="https://github.com/user-attachments/assets/7bb51bb9-b862-4a7a-a877-81c4832c74b7" />
 
 
-## 📄 Licensing 
-
-Released under the **MIT License** — free to use, modify, and extend as you like. 
-
-
+## 📄 Licensing - MIT 
+The MIT License is a permissive, free software license developed at MIT that allows users to freely use, copy, modify, merge, publish, distribute, sublicense, and sell software with very few restrictions. The only main requirements are to include the original copyright and license notice with all copies or substantial portions of the software. It comes with no warranty and no liability for the authors
 ### Request demo file 
 
 [fmrouter@thedatadrivenlife.com](mailto:fmrouter@thedatadrivenlife.com)
