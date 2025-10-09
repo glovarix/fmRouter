@@ -30,7 +30,7 @@ This repository includes the **full XML copy and DDR**, so you can explore the s
 * 🧪 **Run controlled experiments**
 * 💾 **Log every execution** 
 
-flowchart TB
+```flowchart TB
     %% Style definitions
     classDef title fill:#293462,stroke:none,color:#fff,font-size:22px,font-weight:bold;
     classDef main fill:#f7fafc,stroke:#3867d6,stroke-width:2px,color:#222,rx:10,ry:10,font-size:16px;
@@ -69,7 +69,7 @@ flowchart TB
 
     %% Some hidden nodes to increase vertical spacing (for beauty in some renderers)
     linkStyle 5,6 stroke:#0000,stroke-width:0;
-
+```
 ## Bonus - You can create and manage JSON prompts directly inside **fmRouter**
 or there is also a custom GPT from the same authaor for creating powerful, structured JSON Prompts  . 
 This GPT is based on the smart metamprompting technique outlined at 
