@@ -9,18 +9,21 @@ Lightweight, yet comprehensive prompt playground architecture that lets FileMake
 This uses  only native FileMaker 2025 script steps. No plugins or addons . 
 FileMaker 2025 makes all of this possible without the Insert From URL step too.
 
----
-
 This repository includes the **full XML copy and DDR**, so you can explore the schema in detail using DDR tools like [**FM Perception**](https://www.geistinteractive.com/products/fm-perception/) or [**InspectorPro**](https://www.productivecomputing.com/inspectorpro).
 
+---
 
 
-## Core Use Cases
+## Core Use Cases and Flow
 
 - Create a New Prompt / Edit Existing Prompts.
 - Edit and  Automatically save Version History.
 - Run a Prompt from Playground with dynamic variables for models, endpoint, temperature settings etc.
 - Keep track of executions, models, prompts and version.
+
+
+<img width="942" height="1740" alt="000297 CleanShot 2025-10-09 at 07 45 50" src="https://github.com/user-attachments/assets/ba6f91e8-d8d6-49bc-87a4-7f617cf3aa95" />
+
 ---
 
 ### 🚀 Summary
@@ -30,46 +33,7 @@ This repository includes the **full XML copy and DDR**, so you can explore the s
 * 🧪 **Run controlled experiments**
 * 💾 **Log every execution** 
 
-```flowchart TB
-    %% Style definitions
-    classDef title fill:#293462,stroke:none,color:#fff,font-size:22px,font-weight:bold;
-    classDef main fill:#f7fafc,stroke:#3867d6,stroke-width:2px,color:#222,rx:10,ry:10,font-size:16px;
-    classDef sub fill:#e3f0fa,stroke:#3867d6,stroke-width:2px,color:#1a3963,rx:8,ry:8,font-size:15px;
-    classDef log fill:#fff8e6,stroke:#ebb000,stroke-width:2px,color:#b29300,rx:8,ry:8;
-    classDef note fill:#eef6ff,stroke-dasharray: 5, 5,stroke-width:2px,stroke:#3867d6;
 
-    %% Nodes
-    T["fmRouter 0.1"]:::title
-
-    PROMPT["<b>Edit / Create Prompts</b><br><span style='font-size:13px'>Version history, structure</span>"]:::main
-
-    subgraph PG
-      direction TB
-      SETTINGS["<b>Select Model / Endpoint</b><br><span style='font-size:13px'>Choose model, endpoint, temperature etc.</span>"]:::sub
-      RUN["<b>Run Prompt</b><br><span style='font-size:13px'>Execute on selected model(s)</span>"]:::sub
-    end
-
-    COMPARE["<b>Compare Outputs</b><br><span style='font-size:13px'>Side by side results</span>"]:::main
-    LOG["<b>Execution & Version Log</b>"]:::log
-
-    %% Main flow
-    T --> PROMPT
-    PROMPT --> SETTINGS
-    SETTINGS --> RUN
-    RUN --> COMPARE
-    COMPARE --> LOG
-
-    %% Iteration feedback
-    SETTINGS -. "Tweak Model/Settings" .-> RUN
-    RUN -. "Revise Prompt" .-> PROMPT
-
-    %% Spacing for better layout
-    PROMPT ---| | PG
-    PG ---| | COMPARE
-
-    %% Some hidden nodes to increase vertical spacing (for beauty in some renderers)
-    linkStyle 5,6 stroke:#0000,stroke-width:0;
-```
 ## Bonus - You can create and manage JSON prompts directly inside **fmRouter**
 or there is also a custom GPT from the same authaor for creating powerful, structured JSON Prompts  . 
 This GPT is based on the smart metamprompting technique outlined at 
