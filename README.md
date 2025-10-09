@@ -22,7 +22,7 @@ This repository includes the **full XML copy and DDR**, so you can explore the s
 - Keep track of executions, models, prompts and version.
 
 
-<img width="942" height="1740" alt="000297 CleanShot 2025-10-09 at 07 45 50" src="https://github.com/user-attachments/assets/ba6f91e8-d8d6-49bc-87a4-7f617cf3aa95" />
+<img width="190" height="540" alt="000297 CleanShot 2025-10-09 at 07 45 50" src="https://github.com/user-attachments/assets/ba6f91e8-d8d6-49bc-87a4-7f617cf3aa95" />
 
 ---
 
