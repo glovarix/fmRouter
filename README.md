@@ -1,5 +1,5 @@
-# fmRouter 0.1 
-### by B. Alexander 2025  - MIT license
+## fmRouter 0.1 by B. Alexander
+
 <img width="2262" height="812" alt="000295 CleanShot 2025-10-08 at 19 24 57" src="https://github.com/user-attachments/assets/e58ef585-c67e-462b-8f45-9c3b9e3d7e28" />
 
 
