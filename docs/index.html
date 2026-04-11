@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fmRouter — AI Playground for FileMaker Pro</title>
+  <meta name="description" content="Prompt Library, Multi-Model AI Playground, and Evaluation Suite for Claris FileMaker Pro." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #05060a;
+      --surface: #0d0f18;
+      --card: #0f1120;
+      --border: rgba(255,255,255,.07);
+      --border-hi: rgba(255,255,255,.13);
+      --text: #f0f2ff;
+      --muted: #6b7499;
+      --dim: #3d4460;
+      --indigo: #6366f1;
+      --indigo-hi: #818cf8;
+      --indigo-lo: rgba(99,102,241,.12);
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --r: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── BACKGROUND MESH ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -5%, rgba(99,102,241,.18) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 35% at 85% 15%, rgba(99,102,241,.10) 0%, transparent 50%),
+        radial-gradient(ellipse 30% 25% at 10% 90%, rgba(16,185,129,.07) 0%, transparent 50%);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      background: rgba(5,6,10,.75);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .9rem; font-weight: 500;
+      color: var(--text); text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-badge {
+      font-size: .6rem; font-weight: 600; letter-spacing: .06em;
+      padding: 2px 8px; border-radius: 99px;
+      background: rgba(99,102,241,.18); color: var(--indigo-hi);
+      border: 1px solid rgba(99,102,241,.3);
+    }
+    .nav-right { display: flex; align-items: center; gap: .75rem; }
+    .nav-link {
+      font-size: .82rem; color: var(--muted); text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-link:hover { color: var(--text); }
+    .btn-gh {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: .82rem; font-weight: 500;
+      padding: 6px 16px; border-radius: 8px;
+      background: var(--surface); color: var(--text);
+      border: 1px solid var(--border-hi); text-decoration: none;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-gh:hover { border-color: var(--indigo); background: var(--indigo-lo); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px clamp(1.25rem, 4vw, 3rem) 80px;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--indigo-hi);
+      padding: 6px 16px; border-radius: 99px;
+      background: rgba(99,102,241,.1); border: 1px solid rgba(99,102,241,.25);
+      margin-bottom: 2rem;
+    }
+    .hero-eyebrow span { width: 5px; height: 5px; border-radius: 50%; background: var(--indigo-hi); display: inline-block; }
+    h1 {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 800; letter-spacing: -.04em; line-height: 1.04;
+      max-width: 840px; margin-bottom: 1.75rem;
+    }
+    h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--indigo-hi) 0%, #a5b4fc 50%, var(--emerald) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(.95rem, 2vw, 1.15rem);
+      color: var(--muted); max-width: 520px; line-height: 1.75;
+      margin-bottom: 3rem;
+    }
+    .hero-actions { display: flex; gap: .875rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3.5rem; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 30px; border-radius: 10px; font-size: .95rem; font-weight: 600;
+      text-decoration: none; background: var(--indigo); color: #fff;
+      box-shadow: 0 0 32px rgba(99,102,241,.45), 0 1px 0 rgba(255,255,255,.1) inset;
+      transition: background .2s, box-shadow .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--indigo-hi); transform: translateY(-2px); box-shadow: 0 4px 40px rgba(99,102,241,.55); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 30px; border-radius: 10px; font-size: .95rem; font-weight: 500;
+      text-decoration: none; color: var(--text);
+      border: 1px solid var(--border-hi); background: transparent;
+      transition: border-color .2s, background .2s, transform .15s;
+    }
+    .btn-outline:hover { border-color: var(--indigo); background: var(--indigo-lo); transform: translateY(-2px); }
+    .hero-meta {
+      display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; justify-content: center;
+      font-size: .78rem; color: var(--dim);
+    }
+    .hero-meta-item { display: flex; align-items: center; gap: 6px; }
+    .dot-green { width: 6px; height: 6px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 8px var(--emerald); }
+    .sep { opacity: .3; }
+
+    /* ── FEATURES BENTO ── */
+    .bento-wrap {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 3rem) 120px;
+    }
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--indigo-hi); margin-bottom: .75rem;
+    }
+    h2 {
+      font-size: clamp(1.75rem, 4vw, 2.6rem);
+      font-weight: 700; letter-spacing: -.03em;
+      line-height: 1.15; margin-bottom: .9rem;
+    }
+    .section-sub {
+      color: var(--muted); font-size: 1rem; max-width: 480px;
+      line-height: 1.7; margin-bottom: 3rem;
+    }
+
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1rem;
+    }
+    .bcard {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 2rem;
+      position: relative; overflow: hidden;
+      transition: border-color .25s, transform .2s;
+    }
+    .bcard::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--glow-color, var(--indigo)), transparent);
+      opacity: 0; transition: opacity .3s;
+    }
+    .bcard:hover { border-color: var(--border-hi); transform: translateY(-2px); }
+    .bcard:hover::after { opacity: 1; }
+
+    .bcard.span2 { grid-column: span 2; }
+    .bcard.span3 { grid-column: span 3; }
+    .bcard.span4 { grid-column: span 4; }
+    .bcard.span6 { grid-column: span 6; }
+
+    .bcard .card-icon {
+      font-size: 1.4rem; margin-bottom: 1.25rem;
+      width: 48px; height: 48px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border); background: rgba(255,255,255,.03);
+    }
+    .bcard h3 { font-size: .95rem; font-weight: 600; margin-bottom: .5rem; }
+    .bcard p  { font-size: .85rem; color: var(--muted); line-height: 1.65; }
+
+    /* Accent glow colours per card */
+    .gc-indigo { --glow-color: var(--indigo); }
+    .gc-emerald { --glow-color: var(--emerald); }
+    .gc-amber   { --glow-color: var(--amber); }
+    .gc-pink    { --glow-color: #e879f9; }
+
+    /* Featured card — spans wide, has bg gradient */
+    .bcard.featured {
+      background: linear-gradient(135deg, rgba(99,102,241,.12) 0%, rgba(16,185,129,.06) 100%);
+      border-color: rgba(99,102,241,.25);
+    }
+    .bcard.featured h3 { font-size: 1.2rem; }
+
+    /* ── DIVIDER ── */
+    .full-divider { border: none; border-top: 1px solid var(--border); }
+
+    /* ── WHAT'S NEW ── */
+    .release {
+      max-width: 1100px; margin: 0 auto;
+      padding: 100px clamp(1.25rem, 4vw, 3rem);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+    }
+    .release-left .pill-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.75rem; }
+    .pill {
+      font-size: .75rem; font-weight: 500;
+      padding: 5px 13px; border-radius: 99px;
+      border: 1px solid var(--border-hi); color: var(--muted);
+    }
+    .pill.hi { border-color: rgba(99,102,241,.4); color: var(--indigo-hi); background: rgba(99,102,241,.08); }
+
+    .tl { display: flex; flex-direction: column; gap: 2.5rem; }
+    .tl-item { display: flex; gap: 1.25rem; }
+    .tl-dot {
+      width: 38px; height: 38px; border-radius: 9px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .td-i { background: rgba(99,102,241,.12); border: 1px solid rgba(99,102,241,.25); }
+    .td-e { background: rgba(16,185,129,.1);  border: 1px solid rgba(16,185,129,.25); }
+    .td-a { background: rgba(245,158,11,.1);  border: 1px solid rgba(245,158,11,.25); }
+    .tl-item h3 { font-size: .9rem; font-weight: 600; margin-bottom: .3rem; }
+    .tl-item p  { font-size: .83rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── SCREENSHOTS ── */
+    .shots-wrap {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 3rem) 120px;
+    }
+    .shots-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+    }
+    .shot {
+      border-radius: var(--r); overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 40px rgba(0,0,0,.6);
+      transition: transform .25s, border-color .25s;
+    }
+    .shot:hover { transform: translateY(-3px); border-color: var(--border-hi); }
+    .shot.wide { grid-column: span 2; }
+    .shot img { width: 100%; display: block; }
+    .shot-cap {
+      padding: .55rem 1rem; border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem; color: var(--dim);
+    }
+
+    /* ── STEPS ── */
+    .steps-band { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .steps-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 100px clamp(1.25rem, 4vw, 3rem);
+    }
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+      border: 1px solid var(--border); border-radius: var(--r); overflow: hidden;
+    }
+    .step {
+      padding: 2.25rem 2rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .step:nth-child(3n) { border-right: none; }
+    .step:nth-last-child(-n+3) { border-bottom: none; }
+    .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem; font-weight: 600; letter-spacing: .12em;
+      color: var(--indigo); margin-bottom: .75rem;
+    }
+    .step h3 { font-size: .9rem; font-weight: 600; margin-bottom: .35rem; }
+    .step p  { font-size: .82rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── CTA ── */
+    .cta {
+      max-width: 1100px; margin: 0 auto;
+      padding: 120px clamp(1.25rem, 4vw, 3rem);
+      text-align: center; display: flex; flex-direction: column; align-items: center;
+    }
+    .cta h2 { margin-bottom: 1rem; }
+    .cta p   { color: var(--muted); max-width: 420px; margin-bottom: 2.5rem; font-size: 1rem; }
+    .cta-actions { display: flex; gap: .875rem; flex-wrap: wrap; justify-content: center; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      max-width: 1100px; margin: 0 auto;
+      padding: 2rem clamp(1.25rem, 4vw, 3rem);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-brand { font-family: 'JetBrains Mono', monospace; font-size: .8rem; color: var(--dim); }
+    .footer-brand strong { color: var(--muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: .8rem; color: var(--dim); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .bcard.span3, .bcard.span4 { grid-column: span 6; }
+      .bcard.span2 { grid-column: span 3; }
+      .release { grid-template-columns: 1fr; gap: 3rem; }
+      .shots-grid { grid-template-columns: 1fr; }
+      .shot.wide { grid-column: span 1; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+      .step:nth-child(3n) { border-right: 1px solid var(--border); }
+      .step:nth-child(2n) { border-right: none; }
+    }
+    @media (max-width: 600px) {
+      nav .nav-right .nav-link { display: none; }
+      .bcard.span2 { grid-column: span 6; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .step { border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      fmRouter
+      <span class="nav-badge">v0.2</span>
+    </a>
+    <div class="nav-right">
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#release" class="nav-link">What's New</a>
+      <a href="#screenshots" class="nav-link">Screenshots</a>
+      <a href="https://github.com/glovarix/fmRouter" class="btn-gh" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">
+      <span></span>
+      Claris FileMaker Pro &times; Multi-Model AI
+    </div>
+    <h1>The <em>AI Playground</em><br>built into FileMaker</h1>
+    <p class="hero-sub">
+      Prompt library, multi-model router, and evaluation suite — using only
+      native FileMaker 2025 script steps. No plugins. No addons.
+    </p>
+    <div class="hero-actions">
+      <a href="https://github.com/glovarix/fmRouter" class="btn-primary" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View on GitHub
+      </a>
+      <a href="mailto:fmrouter@thedatadrivenlife.com" class="btn-outline">
+        Request Demo &rarr;
+      </a>
+    </div>
+    <div class="hero-meta">
+      <span class="hero-meta-item"><span class="dot-green"></span>Native FM 2025</span>
+      <span class="sep">/</span>
+      <span class="hero-meta-item">Zero plugins</span>
+      <span class="sep">/</span>
+      <span class="hero-meta-item">MIT License</span>
+      <span class="sep">/</span>
+      <span class="hero-meta-item">OpenRouter &amp; LM Studio</span>
+    </div>
+  </section>
+
+  <!-- FEATURES BENTO -->
+  <div class="bento-wrap" id="features">
+    <div class="section-label">What it does</div>
+    <h2>Prompt. Evaluate. Observe.</h2>
+    <p class="section-sub">
+      Everything a FileMaker developer needs to run serious AI workflows — without ever leaving their solution.
+    </p>
+    <div class="bento">
+
+      <!-- Wide featured card -->
+      <div class="bcard span4 featured gc-indigo">
+        <div class="card-icon">&#9881;</div>
+        <h3>Multi-Model Routing</h3>
+        <p>Route any prompt to any model — GPT-4o, Claude, Mistral, Llama — via OpenRouter, LM Studio, or any OpenAI-compatible endpoint. Endpoints, models, and sources are fully dynamic at runtime.</p>
+      </div>
+
+      <div class="bcard span2 gc-emerald">
+        <div class="card-icon">&#9878;</div>
+        <h3>LLM-as-Judge</h3>
+        <p>Designate a judge model to score and reason about output quality automatically. Evaluation as a first-class workflow.</p>
+      </div>
+
+      <div class="bcard span2 gc-indigo">
+        <div class="card-icon">&#128203;</div>
+        <h3>Prompt Library</h3>
+        <p>Author and version prompts in JSON, Markdown, or plain text — with database variable injection baked in.</p>
+      </div>
+
+      <div class="bcard span2 gc-amber">
+        <div class="card-icon">&#128202;</div>
+        <h3>Execution Tracing</h3>
+        <p>Every run logged in full: model, endpoint, temperature, prompt version, output. Complete observability.</p>
+      </div>
+
+      <div class="bcard span2 gc-indigo">
+        <div class="card-icon">&#129302;</div>
+        <h3>agentic-fm</h3>
+        <p>Integrates with the Agentic FileMaker Coding framework for multi-step AI workflows.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="full-divider" />
+
+  <!-- WHAT'S NEW -->
+  <div id="release">
+    <div class="release">
+      <div class="release-left">
+        <div class="section-label">Release Notes</div>
+        <h2>What's new<br>in 0.2</h2>
+        <p class="section-sub" style="max-width:380px">
+          Version 0.2 turns fmRouter from a prompt runner into a proper
+          evaluation and observability platform.
+        </p>
+        <div class="pill-row">
+          <span class="pill hi">Non-JSON Prompts</span>
+          <span class="pill hi">LLM-as-Judge</span>
+          <span class="pill hi">agentic-fm</span>
+          <span class="pill">Side-by-Side Compare</span>
+          <span class="pill">Full Trace Logging</span>
+        </div>
+      </div>
+      <div class="tl">
+        <div class="tl-item">
+          <div class="tl-dot td-i">&#128196;</div>
+          <div>
+            <h3>Non-JSON Prompt Support</h3>
+            <p>Prompts can now be Markdown, plain text, or any format. Opens fmRouter to creative, instructional, and complex tool-calling workflows.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot td-e">&#9878;</div>
+          <div>
+            <h3>Evaluation Pipeline</h3>
+            <p>Attach rubrics to any prompt. Route outputs to a judge model for automated scoring. Compare results across runs, models, and versions.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot td-a">&#129302;</div>
+          <div>
+            <h3>agentic-fm Integration</h3>
+            <p>Connect prompt and evaluation infrastructure to agentic-fm for multi-step AI coding workflows directly in FileMaker.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="full-divider" />
+
+  <!-- SCREENSHOTS -->
+  <div class="shots-wrap" id="screenshots" style="padding-top:100px">
+    <div class="section-label">Interface</div>
+    <h2>See it in action</h2>
+    <p class="section-sub">Purpose-built for FileMaker Pro — every screen designed for speed and clarity.</p>
+    <div class="shots-grid">
+      <div class="shot wide">
+        <img src="https://github.com/user-attachments/assets/ba6f91e8-d8d6-49bc-87a4-7f617cf3aa95" alt="fmRouter navigation" loading="lazy" />
+        <div class="shot-cap">// Navigation overview</div>
+      </div>
+      <div class="shot">
+        <img src="https://github.com/user-attachments/assets/55f75988-92dd-44c8-b991-14158ef8e8e5" alt="Playground" loading="lazy" />
+        <div class="shot-cap">// AI Playground</div>
+      </div>
+      <div class="shot">
+        <img src="https://github.com/user-attachments/assets/7bb51bb9-b862-4a7a-a877-81c4832c74b7" alt="Prompt history" loading="lazy" />
+        <div class="shot-cap">// Prompt management &amp; history</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps-band">
+    <div class="steps-inner">
+      <div class="section-label">How it works</div>
+      <h2 style="margin-bottom:2.5rem">From idea to insight</h2>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">01 &mdash; Author</div>
+          <h3>Write your prompt</h3>
+          <p>JSON, Markdown, or plain text. Inject FileMaker database variables directly into your prompts.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02 &mdash; Configure</div>
+          <h3>Set model &amp; params</h3>
+          <p>Choose any model, endpoint, temperature, and runtime parameters — all dynamic.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03 &mdash; Run</div>
+          <h3>Execute anywhere</h3>
+          <p>Cloud via OpenRouter or local via LM Studio. Any OpenAI-compatible endpoint works.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04 &mdash; Evaluate</div>
+          <h3>Score outputs</h3>
+          <p>Apply custom rubrics or route to an LLM-as-Judge for automatic quality scoring.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">05 &mdash; Compare</div>
+          <h3>Side-by-side results</h3>
+          <p>Diff outputs across models, versions, and parameter settings in structured views.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">06 &mdash; Iterate</div>
+          <h3>Version &amp; improve</h3>
+          <p>Version history auto-saves every edit. Build on a growing library of validated prompts.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="section-label">Get started</div>
+    <h2>Ready to build?</h2>
+    <p>Clone the repo, explore the schema, or request a live demo file.</p>
+    <div class="cta-actions">
+      <a href="https://github.com/glovarix/fmRouter" class="btn-primary" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View on GitHub
+      </a>
+      <a href="mailto:fmrouter@thedatadrivenlife.com" class="btn-outline">✉ Request Demo</a>
+      <a href="https://chatgpt.com/g/g-68aea2a957a8819186af31f366b178df-baxter-prompt-butler-json" class="btn-outline" target="_blank" rel="noopener">Baxter GPT &rarr;</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">
+      <strong>fmRouter</strong> &nbsp;&bull;&nbsp; MIT License &nbsp;&bull;&nbsp; Claris FileMaker Pro 2025
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/glovarix/fmRouter" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/binu-alexander/metaprompter" target="_blank" rel="noopener">metaprompter</a>
+      <a href="https://www.agentic-fm.com" target="_blank" rel="noopener">agentic-fm</a>
+      <a href="mailto:fmrouter@thedatadrivenlife.com">Contact</a>
+    </div>
+  </footer>
+
+</body>
+</html>
